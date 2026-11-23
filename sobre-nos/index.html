@@ -71,26 +71,13 @@ header a[aria-label="Vanlifezando, página inicial"]{align-self:start;margin-top
 
 
 
-/* ===== PADRAO LEITURA (inicio) ===== */
-main.st-main{position:relative;z-index:0}
-main.st-main::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:0px;bottom:0;background:#FFFFFF;box-shadow:0 0 0 100vmax #FFFFFF;clip-path:inset(0 -100vmax)}
-main.st-main > section.st-intro{background:#141B12;box-shadow:0 0 0 100vmax #141B12;clip-path:inset(-400px -100vmax -48px -100vmax)}
 
-main.st-main > :not(section.st-intro){color:#1B2418}
-main.st-main > :not(section.st-intro) [style*="color: rgb(242, 240, 232)"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *):not([style*="background: rgb(33, 43, 29)"]):not([style*="background: rgb(42, 31, 22)"]):not([style*="background: rgb(27, 36, 24)"]):not([style*="background: rgb(20, 27, 18)"]):not([style*="background: rgb(38, 48, 31)"]):not([style*="background: rgb(188, 108, 37)"]):not([style*="background: rgb(221, 161, 94)"]){color:#1B2418 !important}
-main.st-main > :not(section.st-intro) [style*="color: rgba(242, 240, 232"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *){color:#2E3529 !important}
-main.st-main > :not(section.st-intro) [style*="color: rgb(189, 185, 168)"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *){color:#474D3F !important}
-main.st-main > :not(section.st-intro) [style*="color: rgb(90, 97, 80)"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *){color:#474D3F !important}
-main.st-main > :not(section.st-intro) [style*="color: rgb(221, 161, 94)"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *):not([style*="background:"]){color:#8A4B12 !important}
-main.st-main > :not(section.st-intro) [style*="color: rgb(240, 179, 126)"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *){color:#8A4B12 !important}
-main.st-main > :not(section.st-intro) [style*="background: rgb(33, 43, 29)"]{background:#1B2418 !important;color:#F2F0E8;border-color:#1B2418;box-shadow:0 6px 18px rgba(27, 36, 24, 0.18)}
-main.st-main > :not(section.st-intro) [style*="rgba(242, 240, 232"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *){border-color:rgba(27, 36, 24, 0.25) !important}
-main.st-main > :not(section.st-intro) [style*="solid rgb(242, 240, 232)"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *):not(img):not([style*="overflow: hidden"]):not([style*="background: rgb(42, 31, 22)"]){border-color:#1B2418 !important}
-main.st-main > :not(section.st-intro) button[style*="background: transparent"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *){color:#1B2418 !important}
-main.st-main > :not(section.st-intro) a:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *):not([style*="background:"]){color:#8A4B12}
-main.st-main > :not(section.st-intro) [aria-hidden="true"][style*="rgba(242, 240, 232, 0.08)"]{color:rgba(27, 36, 24, 0.16) !important}
-main.st-main > :not(section.st-intro) [style*="background: rgba(242, 240, 232"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *){background:rgba(27, 36, 24, 0.18) !important}
-main.st-main > :not(section.st-intro) [style*="background: rgb(33, 43, 29)"] [style*="color: rgb(189, 185, 168)"]{color:#D6D2C3 !important}
+/* ===== PADRAO LEITURA (inicio) ===== */
+main.st-main .st-text{background:#F2EDE3 !important;color:#1B2418 !important;box-shadow:0 14px 34px rgba(0, 0, 0, 0.35)}
+main.st-main .st-text [style*="color: rgb(242, 240, 232)"],main.st-main .st-text [style*="color: rgba(242, 240, 232"]{color:#1B2418 !important}
+main.st-main .st-text [style*="color: rgb(189, 185, 168)"]{color:#474D3F !important}
+main.st-main .st-text [style*="color: rgb(221, 161, 94)"]{color:#8A4B12 !important}
+main.st-main .st-text a{color:#8A4B12 !important}
 
 /* Títulos dos quadros escuros em laranja */
 main.st-main [style*="background: rgb(33, 43, 29)"] div[style*="font-size: 10px; font-weight: 700"][style*="text-transform: uppercase"],
