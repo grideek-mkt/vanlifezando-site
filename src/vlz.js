@@ -90,6 +90,44 @@
       }
     }
   }
+
+  // Foto ampliada no celular: toque numa foto do conteúdo abre maior, com X para fechar
+  function fotoGrande() {
+    if (window.__vlzLb) return; window.__vlzLb = 1;
+    var mq = window.matchMedia('(max-width: 900px)');
+    var st = document.createElement('style');
+    st.textContent = '@media (max-width: 900px){#vlz main img{cursor:zoom-in}}' +
+      '.vlz-lb{position:fixed;inset:0;z-index:200;background:rgba(10,13,9,0.92);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .2s ease}' +
+      '.vlz-lb.on{opacity:1}' +
+      '.vlz-lb img{display:block;max-width:100%;max-height:70vh;width:auto;height:auto;object-fit:contain;box-shadow:0 12px 40px rgba(0,0,0,0.5)}' +
+      '.vlz-lb button{position:absolute;top:calc(env(safe-area-inset-top, 0px) + 14px);right:14px;width:48px;height:48px;border:0;border-radius:50%;background:rgba(242,240,232,0.14);color:#F2F0E8;font:300 32px/48px Arial,sans-serif;text-align:center;cursor:pointer;padding:0}';
+    document.head.appendChild(st);
+    var aberto = null;
+    function fechar() {
+      if (!aberto) return; var el = aberto; aberto = null;
+      el.classList.remove('on'); setTimeout(function () { el.remove(); }, 200);
+      document.removeEventListener('keydown', tecla);
+    }
+    function tecla(e) { if (e.key === 'Escape') fechar(); }
+    document.addEventListener('click', function (e) {
+      if (!mq.matches || aberto) return;
+      var img = e.target && e.target.closest ? e.target.closest('img') : null;
+      if (!img || !img.closest('#vlz main')) return;
+      if (img.closest('a, button, summary, .capa2, header, nav')) return;
+      if (img.getBoundingClientRect().width < 80) return;
+      e.preventDefault();
+      var lb = document.createElement('div');
+      lb.className = 'vlz-lb'; lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Foto ampliada');
+      var g = document.createElement('img'); g.src = img.currentSrc || img.src; g.alt = img.alt || '';
+      var x = document.createElement('button'); x.type = 'button'; x.setAttribute('aria-label', 'Fechar foto'); x.textContent = '×';
+      lb.appendChild(g); lb.appendChild(x);
+      lb.addEventListener('click', function (ev) { ev.stopPropagation(); fechar(); });
+      document.body.appendChild(lb); aberto = lb;
+      requestAnimationFrame(function () { lb.classList.add('on'); });
+      document.addEventListener('keydown', tecla);
+      x.focus({ preventScroll: true });
+    }, true);
+  }
   function sig(n) {
     if (n.nodeType !== 1) return '#' + n.nodeType;
     return n.nodeName + '|' + (n.getAttribute('class') || '') + '|' + (n.getAttribute('aria-label') || '') + '|' + (n.getAttribute('style') || '').slice(0, 40);
@@ -226,6 +264,7 @@
       pg.render(true);
       window.__vlzPagina = pg;
       try { efeitos(); } catch (e) {}
+      try { fotoGrande(); } catch (e) {}
       try { var H = document.documentElement, rol = function () { H.classList.toggle('vlz-rolou', (window.scrollY || H.scrollTop) > 30); }; window.addEventListener('scroll', rol, { passive: true }); rol(); } catch (e) {}
       return pg;
     }
