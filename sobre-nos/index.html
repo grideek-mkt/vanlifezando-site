@@ -72,6 +72,13 @@ header a[aria-label="Vanlifezando, página inicial"]{align-self:start;margin-top
 
 
 
+/* Linha do tempo: caixa alinhada com a data e o traço ligando até a linha central (23/11/2026) */
+@container (min-width: 901px){
+main.st-main .st-row > .st-text{align-self:start}
+main.st-main .st-conn{width:92px !important}
+main.st-main .st-conn[style*="right: -32px"]{right:-92px !important}
+main.st-main .st-conn[style*="left: -32px"]{left:-92px !important}
+}
 /* ===== PADRAO LEITURA (inicio) ===== */
 main.st-main .st-text{background:#F2EDE3 !important;color:#1B2418 !important;box-shadow:0 14px 34px rgba(0, 0, 0, 0.35)}
 main.st-main .st-text [style*="color: rgb(242, 240, 232)"],main.st-main .st-text [style*="color: rgba(242, 240, 232"]{color:#1B2418 !important}
