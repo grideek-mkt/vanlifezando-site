@@ -1,0 +1,10 @@
+const {chromium}=require('playwright');
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1280,height:800}});
+const errs=[];p.on('pageerror',e=>errs.push(e.message));
+await p.addInitScript(()=>{const o=CSS.supports.bind(CSS);CSS.supports=function(a,b){if(String(a).includes('animation-timeline'))return false;return o(a,b)}});
+await p.goto('http://127.0.0.1:8765/dolomitas-de-motorhome/');await p.waitForTimeout(500);
+const r0=await p.evaluate(()=>({bar:document.querySelector('.vlz-progresso').style.transform,hidden:[...document.querySelectorAll('main > section > *, main > div > section > *')].filter(e=>e.style.opacity==='0').length}));
+await p.evaluate(()=>window.scrollTo(0,3000));await p.waitForTimeout(1200);
+const r1=await p.evaluate(()=>({bar:document.querySelector('.vlz-progresso').style.transform,hidden:[...document.querySelectorAll('main > section > *, main > div > section > *')].filter(e=>e.style.opacity==='0').length}));
+await p.screenshot({path:__dirname+'/fx.png'});
+console.log(r0,r1,errs);await b.close()})();
