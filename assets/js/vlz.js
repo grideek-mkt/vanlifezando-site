@@ -213,6 +213,7 @@
       pg.render(true);
       window.__vlzPagina = pg;
       try { efeitos(); } catch (e) {}
+      try { var H = document.documentElement, rol = function () { H.classList.toggle('vlz-rolou', (window.scrollY || H.scrollTop) > 30); }; window.addEventListener('scroll', rol, { passive: true }); rol(); } catch (e) {}
       return pg;
     }
   };
