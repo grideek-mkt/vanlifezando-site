@@ -140,6 +140,20 @@
       x.focus({ preventScroll: true });
     }, true);
   }
+
+  // Linha de nomes que rola de lado (celular): mantém o nome selecionado à vista
+  function chipsVisiveis() {
+    if (window.__vlzChips) return; window.__vlzChips = 1;
+    function ajusta() {
+      document.querySelectorAll('.dl-chips').forEach(function (c) {
+        var a = c.querySelector('[aria-selected="true"]');
+        if (!a || c.scrollWidth <= c.clientWidth + 1) return;
+        var cr = c.getBoundingClientRect(), ar = a.getBoundingClientRect();
+        if (ar.left < cr.left + 4 || ar.right > cr.right - 40) c.scrollTo({ left: Math.max(0, c.scrollLeft + ar.left - cr.left - 4), behavior: 'smooth' });
+      });
+    }
+    new MutationObserver(function () { requestAnimationFrame(ajusta); }).observe(document.getElementById('vlz') || document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ['aria-selected'] });
+  }
   function sig(n) {
     if (n.nodeType !== 1) return '#' + n.nodeType;
     return n.nodeName + '|' + (n.getAttribute('class') || '') + '|' + (n.getAttribute('aria-label') || '') + '|' + (n.getAttribute('style') || '').slice(0, 40);
@@ -277,6 +291,7 @@
       window.__vlzPagina = pg;
       try { efeitos(); } catch (e) {}
       try { fotoGrande(); } catch (e) {}
+      try { chipsVisiveis(); } catch (e) {}
       try { var H = document.documentElement, rol = function () { H.classList.toggle('vlz-rolou', (window.scrollY || H.scrollTop) > 30); }; window.addEventListener('scroll', rol, { passive: true }); rol(); } catch (e) {}
       return pg;
     }
