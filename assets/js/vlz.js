@@ -51,10 +51,10 @@
     });
     h = h.replace(/\shint-placeholder-[\w-]+="[^"]*"/g, '');
     // buracos {{x}} — em atributo escapa aspas
-    h = h.replace(/(="[^"]*)?\{\{([\w.]+)\}\}/g, function (x, pre, k) {
+    h = h.replace(/\{\{([\w.]+)\}\}/g, function (x, k) {
       var v = get(vals, k);
       v = (v == null || typeof v === 'function') ? '' : String(v);
-      return (pre || '') + esc(v, true);
+      return esc(v, true);
     });
     // valores vindos de listas
     h = h.replace(/\u0001([\s\S]*?)\u0002/g, function (x, v) { return esc(v, true); });
@@ -150,6 +150,48 @@
     }
   };
 
+  /* Barra de leitura e entrada dos blocos ao rolar, para navegadores sem
+     animação por rolagem no CSS (Safari, Firefox). No Chrome o CSS já faz. */
+  function efeitos() {
+    if (window.CSS && CSS.supports && CSS.supports('animation-timeline', 'view()')) return;
+    var bar = document.querySelector('.vlz-progresso');
+    if (bar) {
+      var s = bar.style;
+      s.display = 'block'; s.position = 'fixed'; s.left = '0'; s.top = '0'; s.height = '3px'; s.width = '100%';
+      s.zIndex = '60'; s.background = 'linear-gradient(90deg,#BC6C25,#DDA15E)'; s.boxShadow = '0 0 10px rgba(221,161,94,.6)';
+      s.transformOrigin = '0 50%'; s.pointerEvents = 'none'; s.willChange = 'transform';
+      var pedido = false;
+      var atualiza = function () {
+        pedido = false;
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        s.transform = 'scaleX(' + (h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0) + ')';
+      };
+      var agenda = function () { if (!pedido) { pedido = true; requestAnimationFrame(atualiza); } };
+      window.addEventListener('scroll', agenda, { passive: true });
+      window.addEventListener('resize', agenda);
+      atualiza();
+    }
+    if (!('IntersectionObserver' in window)) return;
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var els = document.querySelectorAll('main > section > *, main > div > section > *');
+    var altura = window.innerHeight;
+    var io = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        var el = en.target; io.unobserve(el);
+        el.style.opacity = '1'; el.style.translate = '0 0';
+        setTimeout(function () { el.style.opacity = ''; el.style.translate = ''; el.style.transition = ''; }, 900);
+      });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    for (var i = 0; i < els.length; i++) {
+      var el = els[i];
+      if (el.getBoundingClientRect().top < altura * 0.92) continue; // já visível: não esconde
+      el.style.opacity = '0'; el.style.translate = '0 32px';
+      el.style.transition = 'opacity .8s cubic-bezier(.2,.8,.2,1), translate .8s cubic-bezier(.2,.8,.2,1)';
+      io.observe(el);
+    }
+  }
+
   window.DCLogic = function DCLogic() { this.props = {}; this.state = {}; };
   window.VLZ = {
     expand: expand,
@@ -161,6 +203,7 @@
       var pg = new Pagina(raiz, tpl, Classe, props);
       pg.render(true);
       window.__vlzPagina = pg;
+      try { efeitos(); } catch (e) {}
       return pg;
     }
   };
