@@ -102,6 +102,13 @@
       '.vlz-lb img{display:block;max-width:100%;max-height:70vh;width:auto;height:auto;object-fit:contain;box-shadow:0 12px 40px rgba(0,0,0,0.5)}' +
       '.vlz-lb button{position:absolute;top:calc(env(safe-area-inset-top, 0px) + 14px);right:14px;width:48px;height:48px;border:0;border-radius:50%;background:rgba(242,240,232,0.14);color:#F2F0E8;font:300 32px/48px Arial,sans-serif;text-align:center;cursor:pointer;padding:0}';
     document.head.appendChild(st);
+    function visivel(el) {
+      for (var n = el; n && n.nodeType === 1 && n.id !== 'vlz'; n = n.parentElement) {
+        var cs = getComputedStyle(n);
+        if (cs.visibility === 'hidden' || cs.display === 'none' || parseFloat(cs.opacity) < 0.2) return false;
+      }
+      return true;
+    }
     var aberto = null;
     function fechar() {
       if (!aberto) return; var el = aberto; aberto = null;
@@ -112,6 +119,11 @@
     document.addEventListener('click', function (e) {
       if (!mq.matches || aberto) return;
       var img = e.target && e.target.closest ? e.target.closest('img') : null;
+      // várias fotos empilhadas (ex.: Antes/Depois): usa a que está visível
+      if (img && !visivel(img) && document.elementsFromPoint) {
+        var achada = document.elementsFromPoint(e.clientX, e.clientY).filter(function (el) { return el.tagName === 'IMG' && visivel(el); })[0];
+        if (achada) img = achada;
+      }
       if (!img || !img.closest('#vlz main')) return;
       if (img.closest('a, button, summary, .capa2, header, nav')) return;
       if (img.getBoundingClientRect().width < 80) return;
