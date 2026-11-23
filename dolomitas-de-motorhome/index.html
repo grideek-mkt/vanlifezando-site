@@ -142,6 +142,11 @@ main.pc-main p,main.pc-main li{line-height:1.65 !important}
 main.pc-main > section:not(#intro):not(#antes-do-guia) [style*="background: rgb(33, 43, 29)"] button[style*="background: transparent"],main.pc-main > section:not(#intro):not(#antes-do-guia) button[aria-label="Lugar anterior"],main.pc-main > section:not(#intro):not(#antes-do-guia) button[aria-label="Próximo lugar"]{color:#F2F0E8 !important;border-color:#F2F0E8 !important}
 /* Blocos encostados com 1 px de sobra: nenhuma linha entre eles em nenhum navegador */
 main.pc-main > section + section{margin-top:-1px !important}
+/* Títulos dos quadros escuros em laranja (pedido da Nica, 23/11/2026) */
+main.pc-main [style*="background: rgb(33, 43, 29)"] div[style*="font-size: 10px; font-weight: 700"][style*="text-transform: uppercase"],main.pc-main [style*="background: #212B1D"] div[style*="font-size: 10px; font-weight: 700"][style*="text-transform: uppercase"],
+main.pc-main [style*="background: rgb(33, 43, 29)"] > div[style^="font-size: 16px; font-weight: 700"],main.pc-main [style*="background: #212B1D"] > div[style^="font-size: 16px; font-weight: 700"],
+main.pc-main [style*="background: rgb(33, 43, 29)"] > div[style^="font-size: 15px; font-weight: 700"],main.pc-main [style*="background: #212B1D"] > div[style^="font-size: 15px; font-weight: 700"],
+main.pc-main .pg-guia details > summary{color:#DDA15E !important}
 /* Autora: texto em duas linhas no computador */
 @container (min-width: 601px){main.pc-main .pc-autor-txt{font-size:16px !important;line-height:1.6 !important}}
 </style>
