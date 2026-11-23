@@ -115,6 +115,8 @@ main.vb-main #guias > .vd-ad:last-child{margin-top:32px}
 /* Título do perrengue numa linha só (23/11/2026) */
 @container (min-width: 901px){main.vb-main .vd-perrengue-tit{white-space:nowrap;font-size:min(34px, calc((min(1120px, 87.5cqi) - 40px) / 38.4)) !important}}
 
+
+@container (max-width: 600px){.capa2-bloco{top:104px !important;bottom:auto !important}.capa2::after{content:"";position:absolute;left:0;right:0;top:0;height:62%;background:linear-gradient(to bottom, rgba(15, 20, 13, 0.78) 0%, rgba(15, 20, 13, 0.55) 55%, rgba(15, 20, 13, 0) 100%);z-index:1;pointer-events:none}}
 @container (max-width: 600px){.capa2-caminho{display:none !important}.capa2{height:max(600px, 100svh) !important}.capa2-grande{font-size:min(18cqi, 96px) !important}}
 /* ===== PADRAO LEITURA (inicio) ===== */
 main.vb-main > section:nth-of-type(even){background:#FFFFFF !important;box-shadow:0 0 0 100vmax #FFFFFF,0 -2px 0 100vmax #FFFFFF !important}
