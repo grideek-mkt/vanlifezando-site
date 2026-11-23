@@ -69,6 +69,56 @@ main a[style*="background: #BC6C25"]:hover,main a[style*="background: rgb(188, 1
 /* Logo igual ao da página inicial (15 px, espaçado; 12 px no celular) */
 @container (max-width: 600px){header a[aria-label="Vanlifezando, página inicial"]{font-size:12px !important;letter-spacing:0.22em !important}}
 header a[aria-label="Vanlifezando, página inicial"]{align-self:start;margin-top:7px}
+
+
+
+/* ===== PADRAO LEITURA (inicio) ===== */
+main.leg{position:relative;z-index:0}
+main.leg::before{content:"";position:absolute;z-index:-1;left:0;right:0;top:96px;bottom:0;background:#FFFFFF;box-shadow:0 0 0 100vmax #FFFFFF;clip-path:inset(0 -100vmax)}
+main.leg{padding-top:168px !important}
+main.leg{color:#1B2418 !important}
+@container (min-width: 601px){main.leg[style*="font-size: 15px"]{font-size:17px !important}}
+@container (max-width: 600px){main.leg[style*="font-size: 15px"]{font-size:16px !important}}
+
+main.leg{color:#1B2418}
+main.leg [style*="color: rgb(242, 240, 232)"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *):not([style*="background: rgb(33, 43, 29)"]):not([style*="background: rgb(42, 31, 22)"]):not([style*="background: rgb(27, 36, 24)"]):not([style*="background: rgb(20, 27, 18)"]):not([style*="background: rgb(38, 48, 31)"]):not([style*="background: rgb(188, 108, 37)"]):not([style*="background: rgb(221, 161, 94)"]){color:#1B2418 !important}
+main.leg [style*="color: rgba(242, 240, 232"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *){color:#2E3529 !important}
+main.leg [style*="color: rgb(189, 185, 168)"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *){color:#474D3F !important}
+main.leg [style*="color: rgb(90, 97, 80)"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *){color:#474D3F !important}
+main.leg [style*="color: rgb(221, 161, 94)"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *):not([style*="background:"]){color:#8A4B12 !important}
+main.leg [style*="color: rgb(240, 179, 126)"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *){color:#8A4B12 !important}
+main.leg [style*="background: rgb(33, 43, 29)"]{background:#1B2418 !important;color:#F2F0E8;border-color:#1B2418;box-shadow:0 6px 18px rgba(27, 36, 24, 0.18)}
+main.leg [style*="rgba(242, 240, 232"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *){border-color:rgba(27, 36, 24, 0.25) !important}
+main.leg [style*="solid rgb(242, 240, 232)"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *):not(img):not([style*="overflow: hidden"]):not([style*="background: rgb(42, 31, 22)"]){border-color:#1B2418 !important}
+main.leg button[style*="background: transparent"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *){color:#1B2418 !important}
+main.leg a:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *):not([style*="background:"]){color:#8A4B12}
+main.leg [aria-hidden="true"][style*="rgba(242, 240, 232, 0.08)"]{color:rgba(27, 36, 24, 0.16) !important}
+main.leg [style*="background: rgba(242, 240, 232"]:not([style*="background: rgb(42, 31, 22)"] *):not([style*="background: rgb(33, 43, 29)"] *):not([style*="background: rgb(27, 36, 24)"] *):not([style*="background: rgb(20, 27, 18)"] *){background:rgba(27, 36, 24, 0.18) !important}
+main.leg [style*="background: rgb(33, 43, 29)"] [style*="color: rgb(189, 185, 168)"]{color:#D6D2C3 !important}
+
+/* Títulos dos quadros escuros em laranja */
+main.leg [style*="background: rgb(33, 43, 29)"] div[style*="font-size: 10px; font-weight: 700"][style*="text-transform: uppercase"],
+main.leg [style*="background: rgb(33, 43, 29)"] > div[style^="font-size: 16px; font-weight: 700"],main.leg [style*="background: rgb(33, 43, 29)"] > div[style^="font-size: 15px; font-weight: 700"],
+main.leg details > summary{color:#DDA15E !important}
+/* Cards dentro de cartões escuros: contorno fino */
+main.leg [style*="background: rgb(33, 43, 29)"] [style*="background: rgb(33, 43, 29)"]{border:1px solid rgba(221, 161, 94, 0.55) !important;box-shadow:none !important}
+/* Texto maior */
+@container (min-width: 601px){
+main.leg [style*="font-size: 13px"]{font-size:15.5px !important}
+main.leg [style*="font-size: 14px"]{font-size:17px !important}
+main.leg [style*="font-size: 15px"]{font-size:17px !important}
+main.leg [style*="font-size: 16px"]{font-size:18px !important}
+main.leg [style*="font-size: 11px"]{font-size:12px !important}
+main.leg p,main.leg li{line-height:1.7 !important}
+}
+@container (max-width: 600px){
+main.leg [style*="font-size: 13px"]{font-size:15px !important}
+main.leg [style*="font-size: 14px"]{font-size:16px !important}
+main.leg [style*="font-size: 15px"]{font-size:16px !important}
+main.leg [style*="font-size: 16px"]{font-size:17px !important}
+main.leg p,main.leg li{line-height:1.65 !important}
+}
+/* ===== PADRAO LEITURA (fim) ===== */
 </style>
 <style>#vlz{container-type:inline-size;width:100%}</style>
 </head>
