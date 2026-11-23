@@ -90,12 +90,25 @@
       }
     }
   }
+  function sig(n) {
+    if (n.nodeType !== 1) return '#' + n.nodeType;
+    return n.nodeName + '|' + (n.getAttribute('class') || '') + '|' + (n.getAttribute('aria-label') || '') + '|' + (n.getAttribute('style') || '').slice(0, 40);
+  }
   function morph(a, b) {
     var ac = a.childNodes, bc = b.childNodes, i;
     for (i = 0; i < bc.length; i++) {
       var x = ac[i], y = bc[i];
       if (!x) { a.appendChild(y.cloneNode(true)); continue; }
-      if (x.nodeType !== y.nodeType || x.nodeName !== y.nodeName) { a.replaceChild(y.cloneNode(true), x); continue; }
+      if (x.nodeType !== y.nodeType || x.nodeName !== y.nodeName) {
+        // bloco que apareceu (ex.: menu aberto): insere sem recriar o resto da página
+        var k, sx = sig(x), sy = sig(y), achou = false;
+        for (k = i + 1; k < Math.min(bc.length, i + 6); k++) if (sig(bc[k]) === sx) { achou = true; break; }
+        if (achou) { for (var m = i; m < k; m++) a.insertBefore(bc[m].cloneNode(true), x); i = k - 1; continue; }
+        // bloco que sumiu (ex.: menu fechado): remove só ele
+        for (k = i + 1; k < Math.min(ac.length, i + 6); k++) if (sig(ac[k]) === sy) { achou = true; break; }
+        if (achou) { for (var r = i; r < k; r++) a.removeChild(ac[i]); i--; continue; }
+        a.replaceChild(y.cloneNode(true), x); continue;
+      }
       if (x.nodeType === 3 || x.nodeType === 8) { if (x.nodeValue !== y.nodeValue) x.nodeValue = y.nodeValue; continue; }
       if (x.nodeType === 1) {
         syncAttrs(x, y);
