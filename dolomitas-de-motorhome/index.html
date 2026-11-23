@@ -147,6 +147,10 @@ main.pc-main [style*="background: rgb(33, 43, 29)"] div[style*="font-size: 10px;
 main.pc-main [style*="background: rgb(33, 43, 29)"] > div[style^="font-size: 16px; font-weight: 700"],main.pc-main [style*="background: #212B1D"] > div[style^="font-size: 16px; font-weight: 700"],
 main.pc-main [style*="background: rgb(33, 43, 29)"] > div[style^="font-size: 15px; font-weight: 700"],main.pc-main [style*="background: #212B1D"] > div[style^="font-size: 15px; font-weight: 700"],
 main.pc-main .pg-guia details > summary{color:#DDA15E !important}
+/* Cards dentro de cartões escuros: contorno fino para aparecer como card */
+main.pc-main > section:not(#intro):not(#antes-do-guia) [style*="background: rgb(33, 43, 29)"] [style*="background: rgb(33, 43, 29)"],main.pc-main > section:not(#intro):not(#antes-do-guia) [style*="background: #212B1D"] [style*="background: #212B1D"]{border:1px solid rgba(221, 161, 94, 0.55) !important;box-shadow:none !important}
+/* Contador das abas (1 de 3) legível no fundo claro */
+main.pc-main > section:not(#intro):not(#antes-do-guia) span[style*="color: rgba(242, 240, 232, 0.7)"]:not([style*="background: rgb(33, 43, 29)"] *){color:#474D3F !important}
 /* Autora: texto em duas linhas no computador */
 @container (min-width: 601px){main.pc-main .pc-autor-txt{font-size:16px !important;line-height:1.6 !important}}
 </style>
