@@ -56,6 +56,15 @@
       v = (v == null || typeof v === 'function') ? '' : String(v);
       return esc(v, true);
     });
+    // cores em hex viram rgb(), como o navegador grava no protótipo (as regras de CSS dependem disso)
+    h = h.replace(/\sstyle="([^"]*)"/g, function (m, v) {
+      return ' style="' + v.replace(/(^|[\s:,(])#([0-9a-fA-F]{8}|[0-9a-fA-F]{6}|[0-9a-fA-F]{3,4})(?![0-9a-zA-Z_-])/g, function (x, pre, hx) {
+        if (hx.length <= 4) hx = hx.split('').map(function (c) { return c + c; }).join('');
+        var r = parseInt(hx.slice(0, 2), 16), g = parseInt(hx.slice(2, 4), 16), b = parseInt(hx.slice(4, 6), 16);
+        if (hx.length === 8) { var al = Math.round(parseInt(hx.slice(6, 8), 16) / 255 * 100) / 100; return pre + 'rgba(' + r + ', ' + g + ', ' + b + ', ' + al + ')'; }
+        return pre + 'rgb(' + r + ', ' + g + ', ' + b + ')';
+      }) + '"';
+    });
     // valores vindos de listas
     h = h.replace(/\u0001([\s\S]*?)\u0002/g, function (x, v) { return esc(v, true); });
     return h;
