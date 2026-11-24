@@ -94,12 +94,12 @@
   // Foto ampliada no celular: toque numa foto do conteúdo abre maior, com X para fechar
   function fotoGrande() {
     if (window.__vlzLb) return; window.__vlzLb = 1;
-    var mq = window.matchMedia('(max-width: 900px)');
+    var mq = { matches: true };
     var st = document.createElement('style');
-    st.textContent = '@media (max-width: 900px){#vlz main img{cursor:zoom-in}}' +
+    st.textContent = '#vlz main img{cursor:zoom-in}#vlz main a img,#vlz main button img{cursor:pointer}' +
       '.vlz-lb{position:fixed;inset:0;z-index:200;background:rgba(10,13,9,0.92);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;transition:opacity .2s ease}' +
-      '.vlz-lb.on{opacity:1}' +
-      '.vlz-lb img{display:block;max-width:100%;max-height:70vh;width:auto;height:auto;object-fit:contain;box-shadow:0 12px 40px rgba(0,0,0,0.5)}' +
+      '.vlz-lb.on{opacity:1}@media (min-width: 901px){.vlz-lb{padding:40px;cursor:zoom-out}.vlz-lb img{max-height:85vh !important}}' +
+      '.vlz-lb img{display:block;max-width:min(100%, 1400px);max-height:70vh;width:auto;height:auto;object-fit:contain;box-shadow:0 12px 40px rgba(0,0,0,0.5)}' +
       '.vlz-lb button{position:absolute;top:calc(env(safe-area-inset-top, 0px) + 14px);right:14px;width:48px;height:48px;border:0;border-radius:50%;background:rgba(242,240,232,0.14);color:#F2F0E8;font:300 32px/48px Arial,sans-serif;text-align:center;cursor:pointer;padding:0}';
     document.head.appendChild(st);
     function visivel(el) {
