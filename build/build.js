@@ -34,6 +34,7 @@ function rewrite(txt, depth) {
 (async () => {
   fs.mkdirSync(OUT + '/assets/js', { recursive: true });
   fs.copyFileSync(S + '/site/src/vlz.js', OUT + '/assets/js/vlz.js');
+  for (const f of fs.readdirSync(S + '/site/src/icones')) fs.copyFileSync(S + '/site/src/icones/' + f, OUT + '/' + f);
   const built = [], sitemap = [];
   for (const [k, cfg] of Object.entries(PAGES)) {
     const src = fs.readFileSync(`${P}/${k}.dc.html`, 'utf8');
@@ -95,6 +96,10 @@ ${cfg.noindex ? '<meta name="robots" content="noindex, follow">\n' : ''}<link re
 <meta property="og:description" content="${escAttr(cfg.desc)}">
 ${ogImg ? `<meta property="og:image" content="${escAttr(ogImg)}">\n` : ''}<meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#141B12">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
 ${ld ? `<script type="application/ld+json">${jsonSafe(ld)}</script>\n` : ''}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
