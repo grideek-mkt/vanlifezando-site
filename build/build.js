@@ -48,6 +48,16 @@ function rewrite(txt, depth) {
     let code = scriptTag[2];
     const title = cfg.title || between(src, '<title>', '</title>').trim();
     tpl = rewrite(tpl, depth); code = rewrite(code, depth);
+    // leveza: fotos médias (assets/img/m) fora da capa; carregamento preguiçoso; a original fica para a foto ampliada
+    {
+      let primeira = true;
+      tpl = tpl.replace(/<img\b([^>]*?)src="([^"]*assets\/img\/)([^"\/]+\.webp)"/g, (m, antes, dir, nome) => {
+        if (primeira) { primeira = false; return '<img fetchpriority="high"' + antes + 'src="' + dir + nome + '"'; }
+        const med = fs.existsSync(OUT + '/assets/img/m/' + nome);
+        return '<img loading="lazy" decoding="async"' + antes + 'src="' + dir + (med ? 'm/' : '') + nome + '"';
+      });
+      code = code.replace(/(assets\/img\/)([^'"\/]+\.webp)/g, (m, dir, nome) => fs.existsSync(OUT + '/assets/img/m/' + nome) ? dir + 'm/' + nome : m);
+    }
     if (k === 'Contato') {
       const a = "self.setState({ ct_tentou: true, ct_status: valido ? 'email' : '' });";
       if (!code.includes(a)) throw new Error('contato: envio mudou');
@@ -90,7 +100,7 @@ ${ld ? `<script type="application/ld+json">${jsonSafe(ld)}</script>\n` : ''}
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 ${links}
 ${styles}
-<style>#vlz{container-type:inline-size;width:100%}#vlz header{position:fixed!important;top:0;left:0;right:0;z-index:50!important;transition:background-color .3s,box-shadow .3s}#vlz header>div{transition:padding .3s}html.vlz-rolou #vlz header{background:rgba(15,20,13,0.95)!important;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 1px 0 rgba(221,161,94,0.25)}html.vlz-rolou #vlz header>div{padding-top:8px!important;padding-bottom:8px!important}#vlz div:has(> nav[aria-label="Menu principal"]){position:fixed!important;inset:0!important;height:auto!important;z-index:70!important}#vlz [id]{scroll-margin-top:84px!important}@media (max-width:600px){#vlz footer>div{flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;gap:22px!important;padding-top:40px!important;padding-bottom:40px!important}#vlz footer>div>a[aria-label^="Vanlifezando"]{align-self:center;font-size:15px!important;letter-spacing:0.32em!important;margin-right:-0.32em}#vlz footer nav[aria-label="Rodapé"]{flex-direction:row!important;flex-wrap:nowrap!important;justify-content:space-between!important;gap:16px!important;border-top:1px solid rgba(242,240,232,0.14);padding-top:22px}#vlz footer nav[aria-label="Rodapé"]>div{gap:4px!important}#vlz footer nav[aria-label="Rodapé"]>div:first-child{align-items:flex-start}#vlz footer nav[aria-label="Rodapé"]>div:last-child{align-items:flex-end;text-align:right}#vlz footer nav[aria-label="Rodapé"] a{font-size:10px!important;letter-spacing:0.08em!important}}@media (max-width:370px){#vlz footer nav[aria-label="Rodapé"] a{font-size:9px!important;letter-spacing:0.05em!important}#vlz footer nav[aria-label="Rodapé"]{gap:10px!important}}</style>
+<style>#vlz{container-type:inline-size;width:100%}#vlz header{position:fixed!important;top:0;left:0;right:0;z-index:50!important;transition:background-color .3s,box-shadow .3s}#vlz header>div{transition:padding .3s}html.vlz-rolou #vlz header{background:rgba(15,20,13,0.97)!important;box-shadow:0 1px 0 rgba(221,161,94,0.25)}html.vlz-rolou #vlz header>div{padding-top:8px!important;padding-bottom:8px!important}#vlz div:has(> nav[aria-label="Menu principal"]){position:fixed!important;inset:0!important;height:auto!important;z-index:70!important}#vlz [id]{scroll-margin-top:84px!important}@media (max-width:600px){#vlz footer>div{flex-direction:column!important;flex-wrap:nowrap!important;align-items:stretch!important;gap:22px!important;padding-top:40px!important;padding-bottom:40px!important}#vlz footer>div>a[aria-label^="Vanlifezando"]{align-self:center;font-size:15px!important;letter-spacing:0.32em!important;margin-right:-0.32em}#vlz footer nav[aria-label="Rodapé"]{flex-direction:row!important;flex-wrap:nowrap!important;justify-content:space-between!important;gap:16px!important;border-top:1px solid rgba(242,240,232,0.14);padding-top:22px}#vlz footer nav[aria-label="Rodapé"]>div{gap:4px!important}#vlz footer nav[aria-label="Rodapé"]>div:first-child{align-items:flex-start}#vlz footer nav[aria-label="Rodapé"]>div:last-child{align-items:flex-end;text-align:right}#vlz footer nav[aria-label="Rodapé"] a{font-size:10px!important;letter-spacing:0.08em!important}}@media (max-width:370px){#vlz footer nav[aria-label="Rodapé"] a{font-size:9px!important;letter-spacing:0.05em!important}#vlz footer nav[aria-label="Rodapé"]{gap:10px!important}}</style>
 </head>
 <body>
 <div id="vlz" data-pre="1"><!--VLZ-PRE--></div>
