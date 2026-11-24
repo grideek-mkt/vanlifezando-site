@@ -130,7 +130,7 @@
       e.preventDefault();
       var lb = document.createElement('div');
       lb.className = 'vlz-lb'; lb.setAttribute('role', 'dialog'); lb.setAttribute('aria-modal', 'true'); lb.setAttribute('aria-label', 'Foto ampliada');
-      var g = document.createElement('img'); g.src = img.currentSrc || img.src; g.alt = img.alt || '';
+      var g = document.createElement('img'); g.decoding = 'async'; g.src = (img.currentSrc || img.src).replace('/assets/img/m/', '/assets/img/'); g.alt = img.alt || '';
       var x = document.createElement('button'); x.type = 'button'; x.setAttribute('aria-label', 'Fechar foto'); x.textContent = '×';
       lb.appendChild(g); lb.appendChild(x);
       lb.addEventListener('click', function (ev) { ev.stopPropagation(); fechar(); });
